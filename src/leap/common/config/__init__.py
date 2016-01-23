@@ -18,9 +18,13 @@
 Common configs
 """
 import os
+import platform
 
-from dirspec.basedir import get_xdg_config_home
-
+if platform.system() != "Windows":
+  from dirspec.basedir import get_xdg_config_home
+else:
+  def get_xdg_config_home():
+    return os.path.join(os.environ["APPDATA"], "Leap")
 
 def get_path_prefix(standalone=False):
     """
